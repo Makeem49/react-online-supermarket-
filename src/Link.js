@@ -1,6 +1,10 @@
 import React from "react";
-
+import clsx from "clsx";
 
 export default function Link(props) {
-    return <a href={props.href} className='ui-link'> {props.children} </a>
+    const {className, children, ...rest} = props;
+    const classes = clsx({
+        "ui-link":true,
+    }, className)
+    return <a {...rest} className={classes}> {children} </a>
 }
