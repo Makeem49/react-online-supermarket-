@@ -11,12 +11,12 @@ export default function ProductList(props) {
     }
 
     const listItems = props.items.map((product, index) => {
-        return <>
+        return <React.Fragment key={product.id}> 
                 <li key={product.id}> <Product details={product}/> 
                 <button onClick={()=>handleRemoveProduct(index)}>Delete</button>
                 
                 </li> 
-            </>
+            </React.Fragment>
     });
 
     return listItems;
