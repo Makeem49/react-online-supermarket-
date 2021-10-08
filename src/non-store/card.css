@@ -1,0 +1,56 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.cards {
+  width: 1200px;
+  height: 400px;
+  text-align: center;
+  display: flex;
+  margin: 100px auto;
+  /* background-color: aqua; */
+}
+
+.card {
+  width: 200px;
+  min-height: 300px;
+  /* background-color: green; */
+  margin: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  overflow: hidden;
+  text-align: justify;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+.image {
+  height: 70%;
+  transform: translateX(-25px);
+  overflow: hidden;
+  flex-grow: 2;
+}
+
+.content {
+  height: 30%;
+  /* background-color: grey; */
+  padding: 3px;
+}
+
+.btn {
+  width: 35px;
+  height: 25px;
+  margin-right: 5px;
+}
+
+.add {
+  background-color: rgb(19, 202, 172);
+}
+
+.sub {
+  background-color: grey(39, 39, 122);
+}
