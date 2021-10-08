@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import "index.css"
+import "store-css/index.css"
 
 export default function Product(props) {
     const [count , setCount ] = useState(0);
