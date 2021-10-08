@@ -1,7 +1,6 @@
 import React, {useState} from "react";
-import {render} from "react-dom";
 import StoreFront from './StoreFront.js'
-import "index.css"
+import "store-css/index.css"
 
 export default function LoginButton() {
     const [login , setLogin] = useState(false)
@@ -25,9 +24,9 @@ export default function LoginButton() {
 
     return (
         <>
-            <StoreFront/>
+            <StoreFront/> 
             <button className="btn btn-outline" onClick={() => setLoggedIn(false)}>Logout</button>
         </>
-    );
-}
+    )
+};
 
