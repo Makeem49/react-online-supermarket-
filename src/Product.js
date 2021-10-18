@@ -3,6 +3,8 @@ import "store-css/index.css"
 
 export default function Product(props) {
     const [count , setCount ] = useState(0);
+
+    console.log(props)
     let disableCount = false;
 
     function handleCountIncreaseClick() {
@@ -18,10 +20,10 @@ export default function Product(props) {
     }
 
     return <div className="product">
-        <img width="50" alt="" src={props.details.image}/>
+        <img width="50" alt="" src={props.details?.image}/>
         <div className="product-info">
-            <h2>{props.details.name}</h2>
-            <p>{props.details.description}</p>
+            <h2>{props.details?.name}</h2>
+            <p>{props.details?.description}</p>
         </div>
         <div className="product-buttons">
             <button className="product-sub" onClick={handleCountDecreaseClick } disabled={disableCount}>-</button>
