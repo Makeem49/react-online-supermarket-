@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import StoreFront from './StoreFront.js'
+import StoreFront from "./StoreFront.js";
 import "store-css/index.css"
 
 export default function LoginButton() {

@@ -7,5 +7,5 @@ export default function Container(props) {
     const classes = clsx({
         "ui-container": true,
     }, className)
-    return <div className={classes} {...rest}>{props.children}</div>
+    return <div className={classes} {...rest}>{children}</div>
 }
