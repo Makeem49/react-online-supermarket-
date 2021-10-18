@@ -1,16 +1,36 @@
-import React, {useState} from "react";
-import Product from "./Product.js"
+import React, {useState, useEffect} from "react";
 import ProductForm from "./ProductForm.js";
 import ProductList from "./ProductList.js"
 import "store-css/index.css"
 
 export default function StoreFront() {
     
-    const [items, setItimes] = useState([]);
+    const [items, setItimes] = useState(() => {
+        const storageResult = localStorage.getItem('products');
+
+        if (storageResult) {
+            return JSON.parse(storageResult)
+        } else {
+            return []
+        }
+    });
     const [name , setName] = useState('');
     const [description, setDescription] = useState('');
     const [messageValidate, setMessageValidate] = useState('');
 
+    useEffect(() => {
+        localStorage.setItem('products', JSON.stringify(items))
+    })
+
+    useEffect(() => {
+        let countItems = items.length;
+
+        if (countItems === 1 || countItems === 0) {
+            document.title = `${countItems} product`
+        } else if (countItems >= 2 ) {
+            document.title = `${countItems} products`
+        }
+    })
 
 
     function handleAddProduct(event) {
