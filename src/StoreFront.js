@@ -14,7 +14,6 @@ export default function StoreFront() {
             return []
         }
     });
-    
     const [name , setName] = useState('');
     const [description, setDescription] = useState('');
     const [messageValidate, setMessageValidate] = useState('');
