@@ -10,12 +10,12 @@ import "store-css/App.css";
 export default function App() {
     return (
         <> 
-            <Container>
+            {/* <Container>
                 <Button type='submit' disabled='disabled'>Submit</Button>
                 <Link href='https://react-tutorial.app'>Shop Online</Link>
                 <Input type='text' placeholder='Enter your message here.' ></Input>
+            </Container> */}
                 <LoginButton/>
-            </Container>
         </>
     )
 }
