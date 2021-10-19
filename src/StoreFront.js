@@ -20,7 +20,7 @@ export default function StoreFront() {
 
     useEffect(() => {
         localStorage.setItem('products', JSON.stringify(items))
-    })
+    }, [items])
 
     useEffect(() => {
         let countItems = items.length;
@@ -31,6 +31,8 @@ export default function StoreFront() {
             document.title = `${countItems} products`
         }
     })
+    
+    const baseURL = 'https://api.learnjavascript.online/demo/react/admin/products'
 
 
     function handleAddProduct(event) {
@@ -46,6 +48,22 @@ export default function StoreFront() {
             setMessageValidate("Please enter a description")
             return null;
         }
+
+        fetch(baseURL, {
+            method : 'post',
+            headers : {
+                "Content-Type" : "Application/json"
+            },
+            body : JSON.stringify({name : name, description : description})
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+        })
+        .catch(error => {
+            console.error(error)
+        })
+
         let addProduct = {
             id : items.length,
             name : name,
