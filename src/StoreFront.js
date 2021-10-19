@@ -66,11 +66,11 @@ export default function StoreFront() {
     }
 
     return <>
+            <ProductForm onhandleForm={handleAddProduct} name={name} description={description} messageValidate={messageValidate} setName={setName} setDescription={setDescription}/>
+
             <div className="store-front">
                 {/* render the two Products here */}
-                {(isLoading) ? <Loader />: ''}
-
-                {listItems}
+                <ProductList items={items} onDeleteItem={handleRemoveProduct}/>
             </div>;
        </> 
 }
