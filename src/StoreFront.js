@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import ProductForm from "./ProductForm.js";
 import ProductList from "./ProductList.js"
 import "store-css/index.css"
+import useFetch from "./useFetch.js";
 
 export default function StoreFront() {
-    
+
     const [items, setItimes] = useState(() => {
         const storageResult = localStorage.getItem('products');
 
@@ -14,9 +15,12 @@ export default function StoreFront() {
             return []
         }
     });
-    const [name , setName] = useState('');
+    const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [messageValidate, setMessageValidate] = useState('');
+    const { post } = useFetch('https://api.learnjavascript.online/demo/react/admin/')
+
+    console.log({post})
 
     useEffect(() => {
         localStorage.setItem('products', JSON.stringify(items))
@@ -27,16 +31,17 @@ export default function StoreFront() {
 
         if (countItems === 1 || countItems === 0) {
             document.title = `${countItems} product`
-        } else if (countItems >= 2 ) {
+        } else if (countItems >= 2) {
             document.title = `${countItems} products`
         }
     })
-    
-    const baseURL = 'https://api.learnjavascript.online/demo/react/admin/products'
+
+    {/* Refactoring the fetch to a custom hook useFetch */ }
+    // const baseURL = 'https://api.learnjavascript.online/demo/react/admin/products'
 
 
     function handleAddProduct(event) {
-        
+
         event.preventDefault()
 
         if (!name) {
@@ -49,26 +54,35 @@ export default function StoreFront() {
             return null;
         }
 
-        fetch(baseURL, {
-            method : 'post',
-            headers : {
-                "Content-Type" : "Application/json"
-            },
-            body : JSON.stringify({name : name, description : description})
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-        })
-        .catch(error => {
-            console.error(error)
-        })
+        post('products', { name: name, description: description })
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+        {/* Refactoring the fetch to a custom hook useFetch */ }
+        // fetch(baseURL, {
+        //     method : 'post',
+        //     headers : {
+        //         "Content-Type" : "Application/json"
+        //     },
+        //     body : JSON.stringify({name : name, description : description})
+        // })
+        // .then(response => response.json())
+        // .then(data => {
+        //     console.log(data)
+        // })
+        // .catch(error => {
+        //     console.error(error)
+        // })
 
         let addProduct = {
-            id : items.length,
-            name : name,
-            description : description,
-            image : "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto,w_300/v1580649400/react-tutorial/products/milk.png",
+            id: items.length,
+            name: name,
+            description: description,
+            image: "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto,w_300/v1580649400/react-tutorial/products/milk.png",
         }
         setItimes([...items, addProduct]);
         setName('');
@@ -77,18 +91,18 @@ export default function StoreFront() {
         // console.log("done")
     }
 
-    
+
     function handleRemoveProduct(indexItem) {
-        let filteredProduct = items.filter((product, index )=> indexItem !== index)
-        setItimes([...filteredProduct])   
+        let filteredProduct = items.filter((product, index) => indexItem !== index)
+        setItimes([...filteredProduct])
     }
 
     return <>
-            <ProductForm onhandleForm={handleAddProduct} name={name} description={description} messageValidate={messageValidate} setName={setName} setDescription={setDescription}/>
+        <ProductForm onhandleForm={handleAddProduct} name={name} description={description} messageValidate={messageValidate} setName={setName} setDescription={setDescription} />
 
-            <div className="store-front">
-                {/* render the two Products here */}
-                <ProductList items={items} onDeleteItem={handleRemoveProduct}/>
-            </div>;
-       </> 
+        <div className="store-front">
+            {/* render the two Products here */}
+            <ProductList items={items} onDeleteItem={handleRemoveProduct} />
+        </div>;
+    </>
 }
