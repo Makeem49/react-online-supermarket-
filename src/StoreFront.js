@@ -1,31 +1,45 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Product from "./Product.js"
 import Loader from "./Loader.js";
 import "store-css/index.css"
+import useFetch from "./useFetch.js";
 
 export default function StoreFront() {
-    
+
     const [items, setItimes] = useState([]);
-    const [isLoading , setIsLoading ] = useState(true);
-    console.log({isLoading})
+    const [isLoading, setIsLoading] = useState(true);
+    const { get } = useFetch('https://react-tutorial-demo.firebaseio.com/')
+    console.log({ isLoading })
 
 
     useEffect(() => {
-        fetch('https://react-tutorial-demo.firebaseio.com/products.json')
-        .then(response => response.json() )
-        .then(data => {
-            console.log(data)
-            setItimes(data)
-        })
-        .catch(error => {
-            console.log(error)
-        })
-        .finally(() => {
-            setIsLoading(false)
-        })
+
+        get('products.json')
+            .then(data => {
+                setItimes(data)
+                setIsLoading(false)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+
+
+        {/* Refactoring the fetch in a custom hook called useFetch */ }
+        // fetch('https://react-tutorial-demo.firebaseio.com/products.json')
+        // .then(response => response.json() )
+        // .then(data => {
+        //     console.log(data)
+        //     setItimes(data)
+        // })
+        // .catch(error => {
+        //     console.log(error)
+        // })
+        // .finally(() => {
+        //     setIsLoading(false)
+        // })
     })
 
-    {/*Fetch data using async/await*/}
+    {/*Fetch data using async/await*/ }
 
     // useEffect(() => {
     //     (
@@ -47,15 +61,15 @@ export default function StoreFront() {
 
     console.log(items)
     const listItems = items.map(item => {
-        return <Product details={item} key={item.id}/>
+        return <Product details={item} key={item.id} />
     })
 
     return <>
-            <div className="store-front">
-                {/* render the two Products here */}
-                {(isLoading) ? <Loader />: ''}
+        <div className="store-front">
+            {/* render the two Products here */}
+            {(isLoading) ? <Loader /> : ''}
 
-                {listItems}
-            </div>;
-       </> 
+            {listItems}
+        </div>;
+    </>
 }
