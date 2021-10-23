@@ -39,7 +39,7 @@ export default function StoreFront() {
         // })
     })
 
-    {/*Fetch data using async/await*/ }
+    {/*Fetch data using async/await*/ } 
 
     // useEffect(() => {
     //     (
