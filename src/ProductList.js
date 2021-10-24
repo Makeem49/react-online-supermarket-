@@ -3,7 +3,6 @@ import Product from "./Product.js";
 
 
 export default function ProductList(props) {
-    console.log(props.items)
     // const itemList = 
 
     function handleRemoveProduct(index) {

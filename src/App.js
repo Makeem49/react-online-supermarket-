@@ -5,6 +5,7 @@ import Container from "./Container.js";
 import Input from "./Input.js";
 import LoginButton from './LoginButton.js'
 import "store-css/App.css";
+import { AppProvider } from "./AppContext.js";
 
 
 export default function App() {
@@ -15,7 +16,10 @@ export default function App() {
                 <Link href='https://react-tutorial.app'>Shop Online</Link>
                 <Input type='text' placeholder='Enter your message here.' ></Input>
             </Container> */}
+            <AppProvider>
                 <LoginButton/>
+            </AppProvider>
         </>
     )
 }
+

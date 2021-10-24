@@ -4,7 +4,7 @@ import "store-css/index.css"
 export default function Product(props) {
     const [count , setCount ] = useState(0);
 
-    console.log(props)
+
     let disableCount = false;
 
     function handleCountIncreaseClick() {
