@@ -1,6 +1,9 @@
 import React, {useState} from "react";
-import StoreFront from './StoreFront.js'
-import "store-css/index.css"
+import StoreFront from './StoreFront.js';
+import "store-css/index.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import ProductDetails from './ProductDetails.js'
+
 
 export default function LoginButton() {
     const [login , setLogin] = useState(false)
@@ -24,8 +27,16 @@ export default function LoginButton() {
 
     return (
         <>
-            <StoreFront/> 
-            <button className="btn btn-outline" onClick={() => setLoggedIn(false)}>Logout</button>
+        <BrowserRouter>
+            <Switch>
+                <Route exact path='/'>
+                    <StoreFront />
+                </Route>
+                <Route exact path='/products/:id'>
+                    <ProductDetails />
+                </Route>
+            </Switch>
+        </BrowserRouter>
         </>
     )
 };

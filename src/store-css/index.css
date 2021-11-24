@@ -10,6 +10,10 @@ body {
   color: black;
 }
 
+a{
+  text-decoration: none;
+}
+
 .btn {
   padding: 10px 20px;
   cursor: pointer;
