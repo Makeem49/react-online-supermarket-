@@ -2,14 +2,20 @@ import React from "react";
 import clsx from "clsx";
 
 export default function Button(props) {
-    const {className, children, ...rest} = props
-    const classes = clsx({
-        'ui-button' : true,
-    }, className)
+  const { children, outline, className, ...rest } = props;
 
-    return (
-        <>
-            <button className={classes} {...rest}> {children} </button>
-        </>
-    )
+  const classNames = clsx(
+    {
+      btn: true,
+      "btn-default": !outline,
+      "btn-outline": outline,
+    },
+    className
+  );
+
+  return (
+    <button className={classNames} {...rest}>
+      {children}
+    </button>
+  );
 }

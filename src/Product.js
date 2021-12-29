@@ -1,34 +1,53 @@
-import React, {useState} from "react";
-import "store-css/index.css"
+import React from "react";
+import { Link } from "react-router-dom";
+import Button from "./Button.js";
 
 export default function Product(props) {
-    const [count , setCount ] = useState(0);
+  const { details } = props;
 
-    console.log(props)
-    let disableCount = false;
+  const productFromCart = props.cart.find(
+    (product) => product.id === details.id
+  );
+  const quantity = productFromCart ? productFromCart.quantity : 0;
 
-    function handleCountIncreaseClick() {
-        setCount(count + 1)
-    }
-
-    function handleCountDecreaseClick() {
-        setCount(count - 1)
-    }
-
-    if (!count) {
-        disableCount = true
-    }
-
-    return <div className="product">
-        <img width="50" alt="" src={props.details?.image}/>
-        <div className="product-info">
-            <h2>{props.details?.name}</h2>
-            <p>{props.details?.description}</p>
+  return (
+    <div className="product">
+      <div className="product-image-container">
+        <Link to={`/products/${details.id}`}>
+          <img
+            src={details.image}
+            width="100"
+            height="100"
+            className="product-image"
+            alt={details.name}
+          />
+        </Link>
+        {quantity > 0 && (
+          <div className="product-quantity-container">
+            <div className="product-quantity">{quantity}</div>
+          </div>
+        )}
+      </div>
+      <div className="product-info">
+        <h3>{details.name}</h3>
+        <p>{details.description}</p>
+      </div>
+      <div className="product-checkout">
+        <div>
+          {quantity > 0 && (
+            <Button
+              outline
+              onClick={() => props.onProductDelete(details.id)}
+              className="product-delete"
+            >
+              x
+            </Button>
+          )}
         </div>
-        <div className="product-buttons">
-            <button className="product-sub" onClick={handleCountDecreaseClick } disabled={disableCount}>-</button>
-            <h3 className="product-count">{(count) ? count : null}</h3>
-            <button className="product-add" onClick={handleCountIncreaseClick }>+</button>
-        </div>
+        <Button outline onClick={() => props.onProductAdd(details)}>
+          ${details.price}
+        </Button>
+      </div>
     </div>
+  );
 }
